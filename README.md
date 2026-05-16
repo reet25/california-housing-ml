@@ -1,95 +1,137 @@
-# California Housing Price Prediction using Machine Learning
-
-## Project Overview
-This project focuses on predicting California housing prices using machine learning regression models. The goal is to analyze housing data, build predictive models, compare their performance, and understand how preprocessing techniques like outlier removal affect model accuracy.
-
-The dataset used is the **California Housing dataset**, which contains information about housing districts in California including income levels, number of rooms, population, and geographical data.
-
----
+# California Housing Price Prediction (Machine Learning Regression Project)
 
 ## Objective
-- Predict median house values in California districts
-- Compare multiple regression models
-- Analyze model performance using evaluation metrics
-- Study impact of preprocessing and outlier handling
+
+The objective of this project is to predict California housing prices using multiple regression models and analyze their performance using evaluation metrics. The focus is on understanding model behavior, improving generalization, and studying the impact of preprocessing techniques such as outlier handling.
 
 ---
 
-## Dataset Information
-The dataset contains 20,640 samples with 8 numerical features:
+## Dataset
 
-- MedInc (Median Income)
-- HouseAge
-- AveRooms
-- AveBedrms
-- Population
-- AveOccup
-- Latitude
-- Longitude
+The project uses the **California Housing dataset**, which contains housing-related information from districts in California.
 
-Target variable: Median House Value
+### Features include:
+- Median Income  
+- House Age  
+- Average Rooms  
+- Average Bedrooms  
+- Population  
+- Average Occupancy  
+- Latitude  
+- Longitude  
 
----
-
-## Machine Learning Models Used
-
-- Linear Regression
-- Decision Tree Regressor
-- Random Forest Regressor
+### Target:
+- Median House Value  
 
 ---
 
-## Evaluation Metrics
+## Workflow
 
-- Mean Squared Error (MSE)
-- R² Score
-- Train vs Test Score Comparison
+This project follows a complete **end-to-end machine learning pipeline**:
+
+### 1. Exploratory Data Analysis (EDA)
+- Feature distribution analysis  
+- Skewness detection  
+- Correlation analysis  
+- Outlier identification  
+
+### 2. Data Preprocessing
+- Train-test split  
+- Outlier detection using IQR method  
+- Selective outlier removal experiments  
+
+### 3. Models Implemented
+- Linear Regression (Baseline model)  
+- Decision Tree Regressor  
+- Random Forest Regressor  
+
+### 4. Model Evaluation
+- Mean Squared Error (MSE)  
+- R² Score  
+- Train vs Test performance comparison  
+
+### 5. Model Validation
+- K-Fold Cross Validation (5 folds)  
+
+### 6. Model Optimization
+- Hyperparameter tuning using RandomizedSearchCV  
+
+### 7. Model Interpretation
+- Residual analysis  
+- Feature importance analysis (Random Forest)  
 
 ---
 
-## Model Performance Comparison
+## Key Results
 
-| Model | MSE | R² Score | Train Score | Test Score |
-|------|------|----------|-------------|------------|
-| Linear Regression | 0.5559 | 0.5758 | 0.6126 | 0.5758 |
-| Linear Regression (After Outlier Removal) | 0.4095 | 0.6844 | 0.6421 | 0.6844 |
-| Decision Tree Regressor | 0.5016 | 0.6172 | 1.0000 | 0.6172 |
-| Random Forest Regressor | 0.2559 | 0.8047 | 0.9735 | 0.8047 |
+| Model | MSE | R² Score |
+|------|------|----------|
+| Linear Regression | ~0.5559 | ~0.5758 |
+| Linear Regression (After Outliers Removed) | ~0.4095 | ~0.6844 |
+| Decision Tree | ~0.50 | ~0.61 |
+| Random Forest | ~0.2559 | ~0.8047 |
+| Tuned Random Forest | ~0.2583 | ~0.8029 |
 
 ---
 
 ## Key Insights
 
-- Linear Regression improved significantly after outlier removal, showing sensitivity to extreme values.
-- Decision Tree Regressor overfitted the training data (perfect training score).
-- Random Forest Regressor performed the best overall due to ensemble learning and better generalization.
-- Not all outliers should be removed; some contain meaningful predictive information.
+- Random Forest performed best among all models  
+- Linear Regression improved significantly after outlier handling  
+- Decision Tree showed overfitting (high train score, lower test score)  
+- Cross-validation gave more reliable performance estimates  
+- Residual analysis showed limitations of linear models  
+- Feature importance highlighted **Median Income** as the strongest predictor  
 
 ---
 
-## Data Preprocessing Techniques
+## Feature Importance (Random Forest)
 
-- Train-test split (80/20)
-- Outlier detection using IQR method
-- Selective outlier removal
-- Exploratory Data Analysis (EDA)
+Most important features:
+- Median Income (strongest predictor)  
+- AveOccup  
+- Latitude / Longitude  
+
+Less influential:
+- Population  
+- AveBedrms  
 
 ---
 
-## Conclusion
+## Model Behavior Analysis
 
-This project demonstrates that:
-- Model performance depends heavily on data quality
-- Simple models can improve significantly with preprocessing
-- Ensemble methods like Random Forest provide the best balance of accuracy and generalization
+- Linear models struggled with non-linearity and outliers  
+- Tree-based models captured complex relationships better  
+- Random Forest balanced bias and variance effectively  
+- Hyperparameter tuning improved stability but not drastically performance  
 
-Random Forest was the best-performing model for this dataset.
+---
+
+## Tech Stack
+
+- Python  
+- Pandas  
+- NumPy  
+- Scikit-learn  
+- Matplotlib  
+
+---
+
+## Key Learnings
+
+- End-to-end ML pipeline design  
+- Impact of outliers on linear models  
+- Model comparison techniques  
+- Cross-validation for robust evaluation  
+- Residual analysis for error diagnostics  
+- Feature importance interpretation  
+- Ensemble learning advantages  
 
 ---
 
 ## Future Improvements
 
-- Hyperparameter tuning
-- Feature engineering (e.g., interaction features)
-- Cross-validation
-- Deployment using Flask or Streamlit
+- Try advanced models (XGBoost / LightGBM)  
+- Feature engineering (log transforms, interactions)  
+- Deployment using Streamlit or Flask  
+- Expanded hyperparameter tuning  
