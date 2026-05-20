@@ -1,6 +1,16 @@
 # California Housing Price Prediction using Machine Learning
 
-## Project Overview
+## Results Summary
+
+* Best Model: Random Forest Regressor
+* Best R² Score: 0.8038
+* Cross Validation: 5-Fold Cross Validation
+* Deployment: Streamlit Web Application
+* Primary Focus: Regression Modeling, Preprocessing, Model Evaluation, Residual Analysis
+
+---
+
+# Project Overview
 
 This project focuses on predicting California housing prices using multiple Machine Learning regression models and evaluating their performance using statistical metrics and validation techniques.
 
@@ -20,11 +30,11 @@ The goal was not only to build accurate models, but also to understand model beh
 
 ---
 
-## Dataset Information
+# Dataset Information
 
 The project uses the California Housing dataset from `sklearn.datasets`.
 
-### Features Used
+## Features Used
 
 * Median Income (`MedInc`)
 * House Age (`HouseAge`)
@@ -35,7 +45,7 @@ The project uses the California Housing dataset from `sklearn.datasets`.
 * Latitude
 * Longitude
 
-### Target Variable
+## Target Variable
 
 * Median House Value
 
@@ -53,22 +63,22 @@ Performed detailed EDA to:
 * Identify outliers
 * Study geographical feature patterns
 
-### EDA Visualizations
-
-#### Feature Distribution Analysis
+### Feature Distribution Analysis
 
 ![EDA](images/exploratory_data_analysis.png)
 
+Feature distributions revealed skewness and extreme observations in several variables, motivating additional preprocessing experiments.
+
 ---
 
-## 2. Data Preprocessing
+# 2. Data Preprocessing
 
-### Train-Test Split
+## Train-Test Split
 
 * 80% Training Data
 * 20% Testing Data
 
-### Outlier Detection
+## Outlier Detection
 
 Used the **IQR (Interquartile Range)** method on:
 
@@ -80,21 +90,21 @@ The experiment demonstrated how selective preprocessing improves Linear Regressi
 
 ---
 
-## 3. Models Implemented
+# 3. Models Implemented
 
-### Linear Regression
+## Linear Regression
 
 Used as a baseline regression model.
 
-### Decision Tree Regressor
+## Decision Tree Regressor
 
 Used to capture non-linear feature relationships.
 
-### Random Forest Regressor
+## Random Forest Regressor
 
 Used ensemble learning to improve generalization and reduce overfitting.
 
-### Hyperparameter Tuning
+## Hyperparameter Tuning
 
 Applied `RandomizedSearchCV` to optimize Random Forest parameters.
 
@@ -112,9 +122,11 @@ Applied `RandomizedSearchCV` to optimize Random Forest parameters.
 
 ---
 
-## Model Comparison Visualization
+# Model Comparison Visualization
 
 ![Model Comparison](images/model_comparison.png)
+
+Random Forest achieved the strongest predictive performance while maintaining better generalization capability than Decision Tree.
 
 ---
 
@@ -133,6 +145,8 @@ These findings highlighted the limitations of Linear Regression on complex relat
 
 ![Residual Analysis](images/residual_analysis.png)
 
+Residual plots showed that Linear Regression could not fully capture the non-linear structure of the dataset.
+
 ---
 
 # Feature Importance Analysis
@@ -145,6 +159,8 @@ Feature importance analysis using Random Forest revealed:
 
 ![Feature Importance](images/feature_importance.png)
 
+Feature importance analysis demonstrated that income and geographical location strongly influence housing prices.
+
 ---
 
 # Cross Validation
@@ -156,6 +172,8 @@ This helped compare:
 * Single train-test split performance
 * Fold-wise consistency
 * Realistic generalization capability
+
+Cross-validation scores showed that some single-split evaluations were slightly optimistic, highlighting the importance of robust validation techniques.
 
 ---
 
@@ -173,9 +191,15 @@ Users can:
 
 ![Streamlit UI](images/streamlit_ui.png)
 
+Interactive interface for entering housing features.
+
+---
+
 ## Prediction Example
 
 ![Prediction](images/streamlit_prediction.png)
+
+Example prediction generated using the deployed model.
 
 ---
 
@@ -199,7 +223,7 @@ california-housing-ml/
 ├── app.py
 ├── images/
 ├── notebooks/
-│   └── California_Housing_Price_Prediction_FINAL.ipynb
+│   └── housing_price_prediction.ipynb
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -232,6 +256,12 @@ california-housing-ml/
 
 ---
 
+# Deployment Note
+
+The Streamlit deployment link generated using LocalTunnel is temporary and may expire after the runtime session ends.
+
+---
+
 # Conclusion
 
 This project demonstrates a complete Machine Learning regression pipeline from raw data analysis to deployment.
@@ -245,4 +275,3 @@ The experiments highlighted that:
 
 Random Forest Regressor achieved the best overall predictive performance with an R² Score above 0.80.
 
-The objective of this project is to analyze housing-related data from California districts and build regression models capable of predicting median house values accurately while understanding model behavior, generalization, and preprocessing impact.
