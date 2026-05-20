@@ -1,129 +1,137 @@
-# California Housing Price Prediction  
-### Machine Learning Regression & Deployment Project
+# California Housing Price Prediction using Machine Learning
 
 ## Project Overview
 
-This project focuses on predicting California housing prices using multiple machine learning regression models and evaluating their performance using standard regression metrics.
+This project focuses on predicting California housing prices using multiple Machine Learning regression models and evaluating their performance using statistical metrics and validation techniques.
 
-The project demonstrates a complete end-to-end machine learning workflow including:
+The project was designed as a complete end-to-end regression workflow covering:
 
-- Exploratory Data Analysis (EDA)
-- Data preprocessing
-- Outlier handling
-- Model training & comparison
-- Cross-validation
-- Hyperparameter tuning
-- Residual analysis
-- Feature importance interpretation
-- Streamlit deployment
+* Exploratory Data Analysis (EDA)
+* Data preprocessing
+* Outlier detection and handling
+* Model training and comparison
+* Cross-validation
+* Residual analysis
+* Hyperparameter tuning
+* Feature importance analysis
+* Streamlit deployment
 
-A deployed Streamlit application was also created to generate real-time housing price predictions using the trained model.
-
----
-
-# Objective
-
-The objective of this project is to analyze housing-related data from California districts and build regression models capable of predicting median house values accurately while understanding model behavior, generalization, and preprocessing impact.
+The goal was not only to build accurate models, but also to understand model behavior, generalization capability, preprocessing impact, and regression diagnostics.
 
 ---
 
-# Dataset Information
+## Dataset Information
 
-The project uses the **California Housing Dataset** available through Scikit-learn.
-
-### Dataset Size
-- 20,640 samples
-- 8 numerical input features
+The project uses the California Housing dataset from `sklearn.datasets`.
 
 ### Features Used
-- Median Income
-- House Age
-- Average Rooms
-- Average Bedrooms
-- Population
-- Average Occupancy
-- Latitude
-- Longitude
+
+* Median Income (`MedInc`)
+* House Age (`HouseAge`)
+* Average Rooms (`AveRooms`)
+* Average Bedrooms (`AveBedrms`)
+* Population
+* Average Occupancy (`AveOccup`)
+* Latitude
+* Longitude
 
 ### Target Variable
-- Median House Value
+
+* Median House Value
 
 ---
 
-# Project Workflow
+# Machine Learning Workflow
 
 ## 1. Exploratory Data Analysis (EDA)
 
-Performed:
-- Distribution analysis
-- Correlation analysis
-- Skewness detection
-- Outlier identification
-- Feature relationship analysis
+Performed detailed EDA to:
+
+* Understand feature distributions
+* Detect skewness
+* Analyze correlations
+* Identify outliers
+* Study geographical feature patterns
+
+### EDA Visualizations
+
+#### Feature Distribution Analysis
+
+![EDA](images/exploratory_data_analysis.png)
 
 ---
 
 ## 2. Data Preprocessing
 
-Implemented:
-- Train-test split
-- Outlier detection using IQR method
-- Selective outlier removal
-- Data cleaning experiments
+### Train-Test Split
+
+* 80% Training Data
+* 20% Testing Data
+
+### Outlier Detection
+
+Used the **IQR (Interquartile Range)** method on:
+
+* AveRooms
+* AveBedrms
+* AveOccup
+
+The experiment demonstrated how selective preprocessing improves Linear Regression performance.
 
 ---
 
-## 3. Machine Learning Models Used
+## 3. Models Implemented
 
 ### Linear Regression
+
 Used as a baseline regression model.
 
 ### Decision Tree Regressor
-Used to capture non-linear relationships in housing data.
+
+Used to capture non-linear feature relationships.
 
 ### Random Forest Regressor
-Used ensemble learning to improve prediction accuracy and reduce overfitting.
+
+Used ensemble learning to improve generalization and reduce overfitting.
+
+### Hyperparameter Tuning
+
+Applied `RandomizedSearchCV` to optimize Random Forest parameters.
 
 ---
 
-# Model Evaluation
+# Model Performance
 
-Models were evaluated using:
-
-- Mean Squared Error (MSE)
-- R² Score
-- Train vs Test comparison
-- Cross-validation performance
-
----
-
-# Model Validation
-
-Implemented:
-- K-Fold Cross Validation (5 folds)
-
-This provided more reliable estimates of model generalization compared to a single train-test split.
+| Model                                | R² Score | Observation                                 |
+| ------------------------------------ | -------- | ------------------------------------------- |
+| Linear Regression                    | 0.5758   | Baseline performance                        |
+| Linear Regression (Outliers Removed) | 0.6844   | Significant improvement after preprocessing |
+| Decision Tree Regressor              | 0.6250   | Overfitting observed                        |
+| Random Forest Regressor              | 0.8038   | Best overall performance                    |
+| Tuned Random Forest                  | 0.8013   | Similar performance after tuning            |
 
 ---
 
-# Hyperparameter Tuning
+## Model Comparison Visualization
 
-Applied:
-- `RandomizedSearchCV`
-
-Used to optimize:
-- Number of estimators
-- Maximum depth
-- Minimum samples split
+![Model Comparison](images/model_comparison.png)
 
 ---
 
 # Residual Analysis
 
-Residual analysis was performed to:
-- Evaluate model error patterns
-- Detect heteroscedasticity
-- Analyze prediction limitations of linear models
+Residual analysis was performed to evaluate regression assumptions and prediction error behavior.
+
+Key observations:
+
+* Non-random residual patterns
+* Heteroscedasticity
+* Underestimation of high target values
+* Increasing error spread in certain prediction ranges
+
+These findings highlighted the limitations of Linear Regression on complex relationships.
+
+![Residual Analysis](images/residual_analysis.png)
 
 ---
 
@@ -131,83 +139,55 @@ Residual analysis was performed to:
 
 Feature importance analysis using Random Forest revealed:
 
-### Most Important Features
-- Median Income
-- Average Occupancy
-- Latitude / Longitude
+* Median Income was the strongest predictor
+* Geographical features had major influence
+* Population-related features contributed less
 
-### Less Influential Features
-- Population
-- Average Bedrooms
+![Feature Importance](images/feature_importance.png)
 
 ---
 
-# Model Performance
+# Cross Validation
 
-| Model | MSE | R² Score |
-|------|------|------|
-| Linear Regression | ~0.5559 | ~0.5758 |
-| Linear Regression (After Outlier Removal) | ~0.4095 | ~0.6844 |
-| Decision Tree Regressor | ~0.50 | ~0.61 |
-| Random Forest Regressor | ~0.2559 | ~0.8047 |
-| Tuned Random Forest | ~0.2583 | ~0.8029 |
+Used 5-Fold Cross Validation to evaluate model stability and generalization performance.
 
----
+This helped compare:
 
-# Key Insights
-
-- Random Forest achieved the best overall performance.
-- Linear Regression improved significantly after outlier handling.
-- Decision Trees showed overfitting tendencies.
-- Ensemble learning improved model generalization.
-- Cross-validation provided more stable evaluation results.
-- Feature importance analysis highlighted Median Income as the strongest predictor.
+* Single train-test split performance
+* Fold-wise consistency
+* Realistic generalization capability
 
 ---
 
-# Streamlit Deployment
+# Streamlit Web Application
 
-A Streamlit web application was developed to allow users to generate real-time housing price predictions interactively.
+A Streamlit application was created for interactive house price prediction.
 
-## Deployment Features
-- Interactive input fields
-- Real-time predictions
-- Trained model loading using Joblib
-- Simple ML deployment workflow
+Users can:
 
----
+* Enter housing feature values
+* Generate real-time predictions
+* Interact with the trained Random Forest model
 
-# Tech Stack
+## Streamlit UI
 
-## Programming & ML
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
+![Streamlit UI](images/streamlit_ui.png)
 
-## Visualization
-- Matplotlib
+## Prediction Example
 
-## Deployment
-- Streamlit
-- Joblib
+![Prediction](images/streamlit_prediction.png)
 
 ---
 
-# Key Learnings
+# Technologies Used
 
-Through this project, I strengthened my understanding of:
-
-- End-to-end ML pipeline development
-- Regression modeling
-- Outlier handling techniques
-- Model comparison
-- Cross-validation
-- Hyperparameter tuning
-- Residual diagnostics
-- Feature importance interpretation
-- Ensemble learning
-- Basic ML deployment using Streamlit
+* Python
+* Pandas
+* NumPy
+* Matplotlib
+* Scikit-learn
+* Streamlit
+* Joblib
 
 ---
 
@@ -216,22 +196,53 @@ Through this project, I strengthened my understanding of:
 ```bash
 california-housing-ml/
 │
-├── California_Housing_Price_Prediction.ipynb
 ├── app.py
-├── random_forest_model.pkl
+├── images/
+├── notebooks/
+│   └── California_Housing_Price_Prediction_FINAL.ipynb
+├── README.md
 ├── requirements.txt
-└── README.md
+└── .gitignore
 ```
+
+---
+
+# Key Learnings
+
+* End-to-end regression workflow implementation
+* Exploratory Data Analysis techniques
+* Outlier handling using IQR
+* Regression model comparison
+* Cross-validation for reliable evaluation
+* Residual analysis and error diagnostics
+* Ensemble learning using Random Forest
+* Hyperparameter tuning with RandomizedSearchCV
+* Impact of preprocessing on model performance
+* Building and deploying ML applications with Streamlit
 
 ---
 
 # Future Improvements
 
-Potential future improvements include:
+* Add feature scaling experiments
+* Deploy permanently using Streamlit Cloud
+* Add advanced regression models like XGBoost
+* Implement model pipelines
+* Add automated hyperparameter optimization
 
-- XGBoost / LightGBM implementation
-- Advanced feature engineering
-- Improved hyperparameter tuning
-- Better UI customization
-- Permanent cloud deployment
+---
 
+# Conclusion
+
+This project demonstrates a complete Machine Learning regression pipeline from raw data analysis to deployment.
+
+The experiments highlighted that:
+
+* Preprocessing quality significantly impacts model performance
+* Cross-validation provides more realistic evaluation
+* Ensemble methods outperform simple regression models on complex datasets
+* Residual analysis is critical for understanding model limitations
+
+Random Forest Regressor achieved the best overall predictive performance with an R² Score above 0.80.
+
+The objective of this project is to analyze housing-related data from California districts and build regression models capable of predicting median house values accurately while understanding model behavior, generalization, and preprocessing impact.
